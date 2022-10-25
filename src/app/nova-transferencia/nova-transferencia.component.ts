@@ -3,6 +3,7 @@ import { TransferenciaService } from './../services/transferencia.service';
 import { HttpClient } from '@angular/common/http';
 import { transformAll } from "@angular/compiler/src/render3/r3_ast";
 import { Component, EventEmitter, Output } from "@angular/core";
+import { Router } from '@angular/router';
 
 
 
@@ -20,7 +21,7 @@ export class NovaTransferenciaComponent {
   valor : number;
   destino : number;
 
-  constructor(private service: TransferenciaService) {}
+  constructor(private service: TransferenciaService, private router: Router) {}
 
   transferir(){
     console.log('Nova Transferência Solicitada');
@@ -34,6 +35,7 @@ export class NovaTransferenciaComponent {
     .subscribe(resultado => {
       console.log(resultado);
       this.cleanCampos();
+      this.router.navigateByUrl('extrato');
     },
     (error) => console.error(error)
     );
